@@ -140,14 +140,11 @@ async def chat(req: Request) -> StreamingResponse:
                     text_parts = [
                         part.text for part in (event.content.parts or []) if getattr(part, "text", None)
                     ]
-                    print(text_parts)
                     if text_parts:
                         if not text_started:
-                            print('text-start')
                             yield _sse_payload({"type": "text-start", "id": text_id})
                             text_started = True
 
-                        print("text-delta")
                         for text_part in text_parts:
                             yield _sse_payload({
                                 "type": "text-delta",
