@@ -19,9 +19,7 @@ export async function POST(req: Request) {
         body,
     })
     
-    console.log(upstream);
     
-
     const headers = new Headers(upstream.headers);
     headers.set("content-type", "text/event-stream");
     headers.set("x-vercel-ai-ui-message-stream", "v1"); // for use with AI SDK
