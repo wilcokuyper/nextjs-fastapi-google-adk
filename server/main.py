@@ -136,7 +136,7 @@ async def chat(req: Request) -> StreamingResponse:
                     yield _sse_payload({"type": "error", "errorText": event.error_message})
                     break
                 
-                if event.content:
+                if event.content and event.partial == True:
                     text_parts = [
                         part.text for part in (event.content.parts or []) if getattr(part, "text", None)
                     ]
